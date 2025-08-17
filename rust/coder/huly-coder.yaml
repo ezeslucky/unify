@@ -1,0 +1,131 @@
+# Huly-Coder Configuration
+# -----------------------
+# This configuration can be overridden in:
+# - ~/huly-coder.yaml
+# - huly-coder-local.yaml
+
+#---------------------------------------
+# AI Provider Configuration
+#---------------------------------------
+# Supported providers:
+# - OpenRouter (default)
+# - Anthropic
+# - OpenAI
+# - LMStudio
+provider: OpenRouter
+
+# Model Configuration
+# Available models depend on the selected provider
+# OpenRouter models:
+# - anthropic/claude-3.5-sonnet (default)
+# - gpt-4o
+# Local models:
+# - qwen3-8b
+# - deepseek-r1-distill-llama-8b
+model: anthropic/claude-3.5-sonnet
+
+# Provider API Configuration
+#provider_api_key: sk-xxxxxxxxxxxxxxxxxxxxx
+#provider_base_url: http://127.0.0.1:1234/v1
+
+# Advanced provider configuration (optional)
+# For example, you can configure openrouter provider routing configuration(https://openrouter.ai/docs/features/provider-routing) as follows:
+# provider_config:
+#   provider:
+#     order: [ "openai", "together"]
+#     allow_fallbacks: false
+
+#---------------------------------------
+# Appearance Configuration
+#---------------------------------------
+# Supported appearance themes:
+# - dark (default)
+# - light
+# - file path to yaml file
+# to develop a new theme, you can run `cargo r -- --autoreload-theme` for autoreload theme on change and specify the theme path in the config file
+appearance:
+  theme: dark
+  user_name: default_user
+
+#---------------------------------------
+# Permission mode
+#---------------------------------------
+# Supported permission modes:
+# - full_autonomous
+# - manual_approval (default)
+# - deny_all
+permission_mode: manual_approval
+
+#---------------------------------------
+# Workspace Configuration
+#---------------------------------------
+workspace: ./target/workspace
+
+#---------------------------------------
+# Memory Embedding Configuration
+#---------------------------------------
+# Supported embedding providers:
+# - fastembed (default)
+# - voyage_ai
+#     type: voyage_ai
+#     api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#     model: voyage-3.5-lite
+#     dimensions: 256
+memory_embedding:
+  type: fastembed
+
+#---------------------------------------
+# Web Interaction Configuration
+#---------------------------------------
+# Web Fetch Options:
+# - direct (default): Direct web access
+# - chrome: Use Chrome browser
+web_fetch: direct
+
+# Web Search Configuration
+# Web Search Options:
+# - Brave Search (default)
+#    type: brave
+#    api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# - SearX (alternative)
+#    type: searx
+#    url: http://localhost:8080/
+web_search:
+  type: brave
+  api_key: BSAnIRlUpQfYjLAs4Dt23DvQyr24vL3
+
+#---------------------------------------
+# MCP (Model Context Protocol) Configuration
+#---------------------------------------
+# mcp:
+#   servers:
+#    # Fetch server configuration
+#    fetch:
+#      transport:
+#        type: stdio
+#        command: docker
+#        args: [ "run", "-i", "--rm", "mcp/fetch", "--ignore-robots-txt" ]
+#        protocol_version: 2024-11-05
+#      system_prompt: Custom system prompt addon for MCP server
+#    
+#    # Weather server configuration
+#    weather:
+#      transport:
+#        type: sse
+#        url: http://127.0.0.1:8080/sse
+#        protocol_version: 2024-11-05
+#
+#    # Web Browser automation (note works only with OpenRouter provider)
+#     puppeteer:
+#       transport:
+#         type: stdio
+#         command: docker.exe
+#         args: ["run", "-i", "--rm", "--init", "-e", "DOCKER_CONTAINER=true", "mcp/puppeteer"]
+#         protocol_version: 2024-11-05
+
+#---------------------------------------
+# AI Assistant Personality Configuration
+#---------------------------------------
+user_instructions: |
+  You are dedicated software engineer working alone. You're free to choose any technology, approach, and solution. 
+  If in doubt please choose the best way you think. Your goal is to build working software based on user request.
